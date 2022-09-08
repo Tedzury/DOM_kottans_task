@@ -1,8 +1,8 @@
 const burger = document.querySelector(".burger");
 const menu = document.querySelector(".menu");
 const menuWrapper = document.querySelector(".menu__wrapper");
-const menuList = document.createElement('ul');
-menuList.classList.add("menu__list", "menu__list_hidden")
+const menuList = document.createElement("ul");
+menuList.classList.add("menu__list", "menu__list_hidden");
 const menuClasses = menuList.classList;
 const contentBox = document.querySelector(".main__content");
 
@@ -24,7 +24,6 @@ const description = document.createElement("p");
 description.classList.add("content__description");
 const mainLegion = document.createElement("h5");
 mainLegion.classList.add("content__main__legion");
-
 
 const greetings = {
   imgUrl: "img/Lorgar.jpg",
@@ -76,8 +75,7 @@ const content = [
 makeFirstPage();
 makeMenu(content);
 burger.addEventListener("click", menuHandler);
-menuList.addEventListener('click', prepareLayoutById);
-
+menuList.addEventListener("click", prepareLayoutById);
 
 function makeFirstPage() {
   const container = document.createElement("div");
@@ -98,8 +96,7 @@ function makeFirstPage() {
 }
 
 function makeMenu(content) {
-
-  content.forEach( item => {
+  content.forEach((item) => {
     const menuItem = document.createElement("li");
     const menuLink = document.createElement("a");
     menuItem.classList.add("menu__item");
@@ -108,13 +105,12 @@ function makeMenu(content) {
     menuLink.textContent = item.name;
     menuItem.append(menuLink);
     menuList.append(menuItem);
-  }) 
+  });
 
   menuWrapper.append(menuList);
 }
 
 function menuHandler() {
-
   function closeMenuByTap(e) {
     if (!e.target.classList.contains("menu__item")) {
       menuClasses.add("menu__list_hidden");
@@ -130,30 +126,29 @@ function menuHandler() {
   }
 }
 
-function prepareLayoutById({target}) {
-
+function prepareLayoutById({ target }) {
   menuHandler();
 
-  const contentId = content.findIndex( item => item.name === target.textContent);
+  const contentId = content.findIndex(
+    (item) => item.name === target.textContent
+  );
 
   prepareLayout(contentId);
 
   function prepareLayout(contentId) {
-
-    if (contentId === undefined) return;
+    if (contentId === -1 ) return;
 
     contentBox.innerHTML = "";
-     
+
     image.setAttribute("srcset", content[contentId].imgUrl);
     name.innerHTML = content[contentId].name;
     subTitle.innerHTML = content[contentId].altName;
     warcry.innerHTML = content[contentId].warCry;
-    description.innerHTML = content[contentId].descr; 
-    mainLegion.innerHTML = content[contentId].mainLegion
+    description.innerHTML = content[contentId].descr;
+    mainLegion.innerHTML = content[contentId].mainLegion;
     textWrapper.append(name, subTitle, warcry, description, mainLegion);
     contentContainer.append(image, textWrapper);
 
     contentBox.append(contentContainer);
   }
 }
-
