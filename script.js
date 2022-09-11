@@ -133,22 +133,18 @@ function prepareLayoutById({ target }) {
     (item) => item.name === target.textContent
   );
 
-  prepareLayout(contentId);
+  if (contentId === -1 ) return;
 
-  function prepareLayout(contentId) {
-    if (contentId === -1 ) return;
+  contentBox.innerHTML = "";
 
-    contentBox.innerHTML = "";
+  image.setAttribute("srcset", content[contentId].imgUrl);
+  name.innerHTML = content[contentId].name;
+  subTitle.innerHTML = content[contentId].altName;
+  warcry.innerHTML = content[contentId].warCry;
+  description.innerHTML = content[contentId].descr;
+  mainLegion.innerHTML = content[contentId].mainLegion;
+  textWrapper.append(name, subTitle, warcry, description, mainLegion);
+  contentContainer.append(image, textWrapper);
 
-    image.setAttribute("srcset", content[contentId].imgUrl);
-    name.innerHTML = content[contentId].name;
-    subTitle.innerHTML = content[contentId].altName;
-    warcry.innerHTML = content[contentId].warCry;
-    description.innerHTML = content[contentId].descr;
-    mainLegion.innerHTML = content[contentId].mainLegion;
-    textWrapper.append(name, subTitle, warcry, description, mainLegion);
-    contentContainer.append(image, textWrapper);
-
-    contentBox.append(contentContainer);
-  }
+  contentBox.append(contentContainer);
 }
